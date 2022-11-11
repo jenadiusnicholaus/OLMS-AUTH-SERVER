@@ -14,7 +14,7 @@ class EmployerLoginView(APIView, AuthAppHttpResponseMixins):
         req_param = self.request.GET.get('tin')
         if req_param is None or req_param == '':
             return self.render_to_auth_app_http_response(None, False, 'Required Query Parameter Tin is Missing', 400)
-        qs = EmployerModels.EmployerModel.objects.filter(tin__exact=req_param)
+        qs = Employer.EmployerModel.objects.filter(tin__exact=req_param)
         if qs.exists():
             sz = EmployerSerializers.EmployerLoginSerializer(qs, many=True)
             return Response(sz.data, status=200)
