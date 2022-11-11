@@ -2,16 +2,16 @@ from django.db import models
 
 
 class BeneficiaryModel(models.Model):
-    loanee_id = models.BigIntegerField()
+    loanee_id = models.BigIntegerField(null=True, blank=True)
     index_no = models.CharField(null=False, blank=False, primary_key=True, max_length=50)
     first_name = models.CharField(null=False, blank=False, max_length=100)
-    middle_name = models.CharField(max_length=100)
+    middle_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(null=False, blank=False, max_length=100)
     sex = models.CharField(null=False, blank=False, max_length=10)
-    national_id = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
-    mobile = models.CharField(max_length=100)
-    control_number = models.BigIntegerField()
+    national_id = models.CharField(max_length=100, null=True, blank=True)
+    email = models.CharField(max_length=100, null=True, blank=True)
+    mobile = models.CharField(max_length=100, null=True, blank=True)
+    control_number = models.BigIntegerField(null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.CharField(max_length=100, null=False, blank=False)
