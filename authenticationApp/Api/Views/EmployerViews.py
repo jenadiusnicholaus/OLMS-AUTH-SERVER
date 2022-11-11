@@ -3,7 +3,7 @@ from rest_framework.response import Response
 
 from ..CustomMixins.AuthAppResponseMixins import AuthAppHttpResponseMixins
 from ..Serializers import EmployerSerializers
-from ...Models import EmployerModels
+from ...Models import Employer
 
 
 class EmployerLoginView(APIView, AuthAppHttpResponseMixins):
