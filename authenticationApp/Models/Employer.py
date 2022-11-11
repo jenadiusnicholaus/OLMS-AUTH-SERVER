@@ -1,6 +1,7 @@
 from django.db import models
-from .Regions import RegionModel
-from .Sectors import SectorsModel
+from .Regions import RegionModel, RegionsSerializer
+from .Sectors import SectorsModel, SectorsSerializer
+from rest_framework import serializers
 
 EMPLOYER_CATEGORY_CHOICES = (
     (1, 'PUBLIC EMPLOYERS'),
@@ -42,3 +43,12 @@ class EmployerModel(models.Model):
         verbose_name = 'Employer',
         verbose_name_plural = 'Employers'
         db_table = 'tbl_employers'
+
+
+class EmployerModelSerializer(serializers.ModelSerializer):
+    region = RegionsSerializer()
+    sectors = SectorsSerializer()
+
+    class Meta:
+        model = EmployerModel
+        fields = '__all__'

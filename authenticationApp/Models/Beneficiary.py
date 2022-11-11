@@ -1,4 +1,5 @@
 from django.db import models
+from rest_framework import serializers
 
 
 class BeneficiaryModel(models.Model):
@@ -24,3 +25,9 @@ class BeneficiaryModel(models.Model):
         verbose_name = 'Beneficiary',
         verbose_name_plural = 'Beneficiaries'
         db_table = 'tbl_beneficiaries'
+
+
+class BeneficiaryModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BeneficiaryModel
+        fields = '__all__'

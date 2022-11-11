@@ -1,4 +1,5 @@
 from django.db import models
+from rest_framework import serializers
 
 
 class SectorsModel(models.Model):
@@ -16,3 +17,9 @@ class SectorsModel(models.Model):
         verbose_name = 'Sector',
         verbose_name_plural = 'Sectors'
         db_table = 'tbl_employer_sectors'
+
+
+class SectorsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SectorsModel
+        fields = '__all__'

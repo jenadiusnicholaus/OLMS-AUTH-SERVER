@@ -1,4 +1,5 @@
 from django.db import models
+from rest_framework import serializers
 
 
 class RegionModel(models.Model):
@@ -15,3 +16,9 @@ class RegionModel(models.Model):
         verbose_name = 'Region',
         verbose_name_plural = 'Regions'
         db_table = 'tbl_regions'
+
+
+class RegionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RegionModel
+        fields = '__all__'

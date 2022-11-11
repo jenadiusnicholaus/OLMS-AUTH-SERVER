@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
-from .Employer import EmployerModel
-from .Beneficiary import BeneficiaryModel
+from .Employer import EmployerModel, EmployerModelSerializer
+from .Beneficiary import BeneficiaryModel, BeneficiaryModelSerializer
 from django.contrib.auth.models import User
 from django.forms import forms
+from rest_framework import serializers
 
 USER_CATEGORIES_CHOICES = (
     ('ADMIN', 'System Admin'),
@@ -15,8 +16,10 @@ USER_CATEGORIES_CHOICES = (
 
 class UserCategory(models.Model):
     user = models.OneToOneField(User, null=False, on_delete=models.CASCADE)
-    employer = models.ForeignKey(EmployerModel, null=True, blank=True, on_delete=models.RESTRICT)
-    beneficiary = models.ForeignKey(BeneficiaryModel, null=True, blank=True, on_delete=models.RESTRICT)
+    employer = models.ForeignKey(EmployerModel, null=True, blank=True, on_delete=models.RESTRICT,
+                                 related_name='employer')
+    beneficiary = models.ForeignKey(BeneficiaryModel, null=True, blank=True, on_delete=models.RESTRICT,
+                                    related_name='beneficiary')
     category = models.CharField(max_length=30, blank=False, default='BENEFICIARY', choices=USER_CATEGORIES_CHOICES)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -41,3 +44,17 @@ class UserCategory(models.Model):
                 {'error': _(f'When A Benef Or Employer Category Is Selected They Should Be Provided')})
         else:
             return super().save(*args, **kwargs)
+
+
+class UserCategorySerializer(serializers.ModelSerializer):
+    beneficiary = BeneficiaryModelSerializer()
+    employer = EmployerModelSerializer()
+
+    class Meta:
+        model = UserCategory
+        fields = [
+            'category',
+            'updated_at',
+            'employer',
+            'beneficiary'
+        ]
