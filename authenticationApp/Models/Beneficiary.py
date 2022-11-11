@@ -23,3 +23,4 @@ class BeneficiaryModel(models.Model):
     class Meta:
         verbose_name = 'Beneficiary',
         verbose_name_plural = 'Beneficiaries'
+        db_table = 'tbl_beneficiaries'

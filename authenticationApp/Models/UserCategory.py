@@ -24,6 +24,7 @@ class UserCategory(models.Model):
         return self.category + '-' + self.employer.employer_name + self.beneficiary.index_no
 
     class Meta:
+        db_table = 'tbl_user_mgt_user_categories'
         constraints = [
             models.CheckConstraint(
                 check=Q(category='BENEFICIARY') & Q(beneficiary__isnull=True),

@@ -14,3 +14,4 @@ class RegionModel(models.Model):
     class Meta:
         verbose_name = 'Region',
         verbose_name_plural = 'Regions'
+        db_table = 'tbl_regions'

@@ -4,7 +4,7 @@ from .Sectors import SectorsModel
 
 EMPLOYER_CATEGORY_CHOICES = (
     (1, 'PUBLIC EMPLOYERS'),
-    (2, 'CENTRAL GOVERMENT EMPLOYERS'),
+    (2, 'CENTRAL GOVERNMENT EMPLOYERS'),
     (3, 'PRIVATE EMPLOYERS')
 )
 
@@ -41,3 +41,4 @@ class EmployerModel(models.Model):
     class Meta:
         verbose_name = 'Employer',
         verbose_name_plural = 'Employers'
+        db_table = 'tbl_employers'

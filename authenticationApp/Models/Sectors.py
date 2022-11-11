@@ -15,3 +15,4 @@ class SectorsModel(models.Model):
     class Meta:
         verbose_name = 'Sector',
         verbose_name_plural = 'Sectors'
+        db_table = 'tbl_employer_sectors'
