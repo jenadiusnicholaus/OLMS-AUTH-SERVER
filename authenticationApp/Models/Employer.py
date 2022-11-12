@@ -13,6 +13,7 @@ EMPLOYER_CATEGORY_CHOICES = (
 class EmployerModel(models.Model):
     employer_id = models.IntegerField(null=False, blank=False, primary_key=True)
     employer_name = models.CharField(max_length=100, blank=False, unique=True, null=False)
+    employer_code = models.CharField(max_length=100, blank=False, unique=True, null=False)
     tin = models.CharField(max_length=100, blank=False, null=False)
     short_code = models.CharField(max_length=20, null=False, blank=False)
     postal_address = models.CharField(max_length=100, null=True, blank=True)

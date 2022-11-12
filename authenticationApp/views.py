@@ -14,9 +14,9 @@ def get_user_permissions(user):
 
 
 def get_user_category_and_object(user):
-    user_category_obj = UserCategory.UserCategory.objects.filter(user=user)
-    print(user_category_obj)
-    sz = UserCategory.UserCategorySerializer(user_category_obj, many=True)
+    user_category_obj = UserCategory.UserCategory.objects.filter(user=user).first()
+    sz = UserCategory.UserCategorySerializer(user_category_obj)
+    print(sz.data)
     return sz.data
 
 
@@ -31,14 +31,17 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     def validate(self, attrs):
         data = super().validate(attrs)
-        data['username'] = self.user.username
-        data['email'] = self.user.email
         user_category_data = get_user_category_and_object(user=self.user)
         permissions = get_user_permissions(user=self.user).values_list('codename', flat=True)
         user_groups = self.user.groups.all().values_list('name', flat=True)
-        data['permissions'] = permissions
-        data['groups'] = user_groups
-        data['user_category'] = user_category_data
+        user_obj = {
+            'username': self.user.username,
+            'email': self.user.email,
+            'permissions': permissions,
+            'groups': user_groups,
+            'user_category': user_category_data
+        }
+        data['user'] = user_obj
         return data
 
 
