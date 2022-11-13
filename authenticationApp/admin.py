@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .Models import Employer, Beneficiary, UserCategory, Regions, Sectors, Districts
+from .Models import Employer, Beneficiary, UserCategory, Regions, Sectors, Districts, LoanOfficer
 
 
 # Register your models here.
@@ -20,6 +20,15 @@ class BeneficiaryModel(admin.ModelAdmin):
     ordering = ('-created_date',)
     preserve_filters = ('index_no', 'loanee_id')
     search_fields = ('index_no', 'loanee_id')
+
+
+@admin.register(LoanOfficer.LoanOfficerModel)
+class LoanOfficerModel(admin.ModelAdmin):
+    list_per_page = 50  # how many elements per page
+    # list_display = ('loanee_id', 'index_no', 'first_name', 'middle_name', 'last_name')  # what fields to show
+    # ordering = ('-created_date',)
+    # preserve_filters = ('index_no', 'loanee_id')
+    # search_fields = ('index_no', 'loanee_id')
 
 
 @admin.register(UserCategory.UserCategory)
