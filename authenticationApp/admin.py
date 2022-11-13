@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .Models import Employer, Beneficiary, UserCategory, Regions, Sectors
+from .Models import Employer, Beneficiary, UserCategory, Regions, Sectors, Districts
 
 
 # Register your models here.
@@ -45,3 +45,12 @@ class SectorsModel(admin.ModelAdmin):
     ordering = ('-created_date',)
     preserve_filters = ('sector_name',)
     search_fields = ('sector_name',)
+
+
+@admin.register(Districts.DistrictsModel)
+class DistrictsModel(admin.ModelAdmin):
+    list_per_page = 50  # how many elements per page
+    list_display = ('district_name', 'created_date',)  # what fields to show
+    ordering = ('-created_date',)
+    preserve_filters = ('district_name', 'region_name')
+    search_fields = ('district_name', 'region_name')
