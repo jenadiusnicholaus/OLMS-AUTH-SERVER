@@ -16,7 +16,7 @@ class BeneficiaryModel(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.CharField(max_length=100, null=False, blank=False)
-    isLoanee = models.BooleanField(blank=False, null=False)
+    is_loanee = models.BooleanField(blank=False, null=False)
 
     def __str__(self):
         return f'{self.last_name}, {self.first_name} {self.first_name} ({self.index_no})'
