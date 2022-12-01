@@ -12,7 +12,7 @@ USER_CATEGORIES_CHOICES = (
     ('ADMIN', 'System Admin'),
     ('BENEFICIARY', 'Beneficiary User Category'),
     ('EMPLOYER', 'Employer User Category'),
-    ('LOAN_OFFICER', 'Loan Officer User Category'),
+    ('OFFICER', 'Loan Officer User Category'),
 )
 
 
@@ -46,7 +46,7 @@ class UserCategory(models.Model):
     def save(self, *args, **kwargs):
         if (self.category == 'BENEFICIARY' and self.beneficiary is None) or (
                 self.category == 'EMPLOYER' and self.employer is None) or (
-                self.category == 'LOAN_OFFICER' and self.loan_officer is None):
+                self.category == 'OFFICER' and self.loan_officer is None):
             raise forms.ValidationError(
                 {'error': _(f'When A Benef Or Employer Or Loan Officer Category Is Selected They Should Be Provided')})
         else:
